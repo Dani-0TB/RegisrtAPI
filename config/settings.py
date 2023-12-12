@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-)vq&$94uk-ffa6-w_ruw26*k!-@_z6kt4^)td@ej^@3#p54d$n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["regirst-api.onrender.com", "https://regirst-api.onrender.com"]
+ALLOWED_HOSTS = ["regirst-api.onrender.com", "https://regirst-api.onrender.com", "127.0.0.1"]
 
 # Application definition
 
