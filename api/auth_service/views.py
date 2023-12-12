@@ -45,7 +45,8 @@ class AutenticarToken(APIView):
 
 class GetNombreCompleto(APIView):
     def post(self, request):
-        user = get_object_or_404(User, username=request.data["username"])
-        if not user.check_password(request.data["password"]):
-            return Response({"detail": "Not Found"}, status.HTTP_404_NOT_FOUND)
-        return Response({"nombre":f"{user.first_name} {user.last_name}"})
+        try:
+            user = get_object_or_404(User, username=request.data["username"])
+            return Response({"nombre":f"{user.first_name} {user.last_name}"})
+        except Exception as e:
+            return Response({"error":str(e)}, status.HTTP_400_BAD_REQUEST)
