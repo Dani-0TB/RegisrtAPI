@@ -125,6 +125,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8100",
+    "https://regirst-api.onrender.com"
 ]
 
 REST_FRAMEWORK = {
