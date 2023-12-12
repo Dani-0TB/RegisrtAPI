@@ -25,10 +25,12 @@ class Login(APIView):
         user = get_object_or_404(User, username=request.data["username"])
         if not user.check_password(request.data["password"]):
             return Response({"detail": "Not Found"}, status.HTTP_404_NOT_FOUND)
+        
         if user.is_staff:
             rol = "profesor"
         else:
             rol = "alumno"
+
         token, created = Token.objects.get_or_create(user=user)
         return Response({"user":request.data["username"],"token": token.key, "rol":rol}, status.HTTP_202_ACCEPTED)
 
@@ -40,3 +42,10 @@ class AutenticarToken(APIView):
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     def get(self, request):
         return Response({f"passed for {request.user.email}"})
+
+class GetNombreCompleto(APIView):
+    def post(self, request):
+        user = get_object_or_404(User, username=request.data["username"])
+        if not user.check_password(request.data["password"]):
+            return Response({"detail": "Not Found"}, status.HTTP_404_NOT_FOUND)
+        return Response({"nombre":f"{user.first_name} {user.last_name}"})

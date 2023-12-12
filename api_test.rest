@@ -1,27 +1,36 @@
-POST http://localhost:8000/api/auth/login HTTP/1.1
+POST https://regirst-api.onrender.com/api/asistencia/mostrarLista HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "admin",
+  "idClase": "1"
+}
+
+###
+
+POST https://regirst-api.onrender.com/api/asistencia/confirmarAsistencia HTTP/1.1
+Content-Type: application/json
+
+{
+  "idClase": "1",
+  "username": "gi.morales"
+}
+
+###
+
+POST https://regirst-api.onrender.com/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "gi.morales",
   "password": "testing321"
 }
 
 ###
 
-POST http://localhost:8000/api/auth/registrar HTTP/1.1
+POST https://regirst-api.onrender.com/api/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "email": "email@mail.com",
-  "password": "testing321"
-}
-
-POST http://localhost:8000/api/auth/registrar HTTP/1.1
-Content-Type: application/json
-
-{
-  "username": "testuser",
-  "email": "email@mail.com",
+  "username": "al.perez",
   "password": "testing321"
 }
