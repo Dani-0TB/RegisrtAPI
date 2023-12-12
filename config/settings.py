@@ -133,3 +133,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://regirst-api.onrender.com"
+]
