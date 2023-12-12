@@ -24,7 +24,7 @@ class Ramo(models.Model):
         return f"{self.nombre}"
 
 class Seccion(models.Model):
-    profesor = models.OneToOneField(Profesor, on_delete=models.CASCADE)
+    profesor = models.ForeignKey(Profesor, on_delete=models.CASCADE)
     ramo = models.ForeignKey(Ramo, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return f"{self.ramo.nombre} S{self.pk} | Profesor: {self.profesor.user.first_name} {self.profesor.user.last_name}"
@@ -56,6 +56,13 @@ class Asistencia(models.Model):
     alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
     fecha = models.DateField(auto_now_add=True)
     presente = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['clase', 'alumno', 'fecha'], name='unique_asistencia_combination'
+            )
+        ]
 
     def __str__(self):
         return f"Asistencia de {self.alumno.user.first_name} {self.alumno.user.last_name} a {self.clase.seccion.ramo.nombre} {self.fecha}"

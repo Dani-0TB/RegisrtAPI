@@ -25,11 +25,15 @@ class Login(APIView):
         user = get_object_or_404(User, username=request.data["username"])
         if not user.check_password(request.data["password"]):
             return Response({"detail": "Not Found"}, status.HTTP_404_NOT_FOUND)
+        if user.is_staff:
+            rol = "profesor"
+        else:
+            rol = "alumno"
         token, created = Token.objects.get_or_create(user=user)
-        return Response({"user":request.data["username"],"token": token.key}, status.HTTP_202_ACCEPTED)
+        return Response({"user":request.data["username"],"token": token.key, "rol":rol}, status.HTTP_202_ACCEPTED)
 
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 class AutenticarToken(APIView):
     permission_classes = [IsAuthenticated]
